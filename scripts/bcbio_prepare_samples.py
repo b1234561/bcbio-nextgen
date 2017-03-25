@@ -27,8 +27,9 @@ def create_new_csv(samples, args):
         with open(tx_out, 'w') as handle:
             handle.write(_header(args.csv))
             for s in samples:
-                sample_name = s['name'] if isinstance(s['out_file'], list) else os.path.basename(s['out_file'])
-                handle.write("%s,%s,%s\n" % (sample_name, s['name'], ",".join(s['anno'])))
+                if s['out_file']:
+                    sample_name = s['name'] if isinstance(s['out_file'], list) else os.path.basename(s['out_file'])
+                    handle.write("%s,%s,%s\n" % (sample_name, s['name'], ",".join(s['anno'])))
 
 
 def _header(fn):

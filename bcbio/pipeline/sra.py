@@ -28,6 +28,8 @@ def _query_info(db, ids):
 def query_gsm(gsm, out_file, config = {}):
     gsm = gsm[0]
     out_dir = os.path.dirname(os.path.abspath(out_file))
+    if utils.file_exists(out_file):
+        return out_file
     name = utils.splitext_plus(os.path.basename(out_file))[0]
     url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds\&term={0}\&retmode=json".format(gsm)
     cmd = "curl {0}".format(url)
